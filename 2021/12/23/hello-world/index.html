@@ -423,21 +423,32 @@
   
 
   
-  <div id="gitment-ctn"></div> 
-<link rel="stylesheet" href="https://wzxjayce.github.io/gitment.css">
-<script src="https://wzxjayce.github.io/gitment.js"></script>
+
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-var gitment = new Gitment({
-  id: "http://example.com/2021/12/23/hello-world/",
-  owner: 'pengzhao2013',
-  repo: 'pengzhao2013.github.io',
-  oauth: {
-    client_id: '2eb85759769ab07d42ab',
-    client_secret: '1115c4025872a86ed24d62338bf8a587aa8ab0ab',
-  },
-})
-gitment.render('gitment-ctn')
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "Jej1SFct4tsDn36PPuPj46Y1-gzGzoHsz",
+    app_key: "5PfOnDrigiIVMk8j3EgjRhmb",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
 </script>
+    </section>
   
 
 
