@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>浏览器请求Servlet及IDEA创建Servlet | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="1.浏览器请求Servlet时UML流程图  2.使用IDEA创建Servlet1.IDEA创建新servlet类   2.IDEA中重写doGet和都Post方法  3.Servlet获取请求的主机IP   4.配置Tomcat  5.启动Tomcat后Alt_R选择redeploy比较快">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器请求Servlet及IDEA创建Servlet">
+<meta property="og:url" content="http://example.com/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.浏览器请求Servlet时UML流程图  2.使用IDEA创建Servlet1.IDEA创建新servlet类   2.IDEA中重写doGet和都Post方法  3.Servlet获取请求的主机IP   4.配置Tomcat  5.启动Tomcat后Alt_R选择redeploy比较快">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/Lt6B2UF9TwGAbnk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/V2DCwQyvsXhr9YZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/4ZMTRhrgnloep6F.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/dtgmBoiHSXvQauA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/xUVcIhFltHEgGuk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/17/bBl8SwDso2y35c7.png">
+<meta property="article:published_time" content="2022-07-17T08:14:12.000Z">
+<meta property="article:modified_time" content="2022-07-17T08:42:36.507Z">
 <meta property="article:author" content="pengzhao2013">
+<meta property="article:tag" content="java web">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/17/Lt6B2UF9TwGAbnk.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -165,121 +177,26 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-浏览器请求Servlet及IDEA创建Servlet" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/23/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      浏览器请求Servlet及IDEA创建Servlet
     </h1>
   
 
         <!--显示阅读次数-->
         
-        <!--显示阅读次数完毕-->
-
-        
-        <a href="/2021/12/23/hello-world/" class="archive-article-date">
-  	<time datetime="2021-12-23T15:22:50.070Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-        
-      
-
-      
-      
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/23/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-浏览器请求Servlet及IDEA创建Servlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/">浏览器请求Servlet及IDEA创建Servlet</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
+          <br/>
+          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+          <span class="icon-sort"></span>
+          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+          </span>
+          </a>
         
         <!--显示阅读次数完毕-->
 
@@ -316,197 +233,36 @@
 
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">java web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-浏览器发送html请求到服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">浏览器发送http请求到服务器</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
-
-        
-        <a href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2022-07-10T14:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="浏览器发送http请求到服务器"><a href="#浏览器发送http请求到服务器" class="headerlink" title="浏览器发送http请求到服务器"></a>浏览器发送http请求到服务器</h1>
-        
-      
-
-      
-      
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-html中input元素默认text和后边的尖括号不必闭合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/19/html%E4%B8%ADinput%E5%85%83%E7%B4%A0%E9%BB%98%E8%AE%A4text%E5%92%8C%E5%90%8E%E8%BE%B9%E7%9A%84%E5%B0%96%E6%8B%AC%E5%8F%B7%E4%B8%8D%E5%BF%85%E9%97%AD%E5%90%88/">html中input元素默认text和后边的尖括号不必闭合</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
-
-        
-        <a href="/2022/06/19/html%E4%B8%ADinput%E5%85%83%E7%B4%A0%E9%BB%98%E8%AE%A4text%E5%92%8C%E5%90%8E%E8%BE%B9%E7%9A%84%E5%B0%96%E6%8B%AC%E5%8F%B7%E4%B8%8D%E5%BF%85%E9%97%AD%E5%90%88/" class="archive-article-date">
-  	<time datetime="2022-06-19T12:54:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="html中input元素默认text和后边的尖括号不必闭合"><a href="#html中input元素默认text和后边的尖括号不必闭合" class="headerlink" title="html中input元素默认text和后边的尖括号不必闭合"></a>html中input元素默认text和后边的尖括号不必闭合</h1>
-        
-      
-
-      
-      
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-
-
       
     </div>
     <div class="article-info article-info-index">
@@ -526,16 +282,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/06/19/html%E4%B8%ADinput%E5%85%83%E7%B4%A0%E9%BB%98%E8%AE%A4text%E5%92%8C%E5%90%8E%E8%BE%B9%E7%9A%84%E5%B0%96%E6%8B%AC%E5%8F%B7%E4%B8%8D%E5%BF%85%E9%97%AD%E5%90%88/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pengzhao2013.github.io/022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浏览器发送http请求到服务器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -550,210 +365,63 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-    <article id="post-空心金字塔-Java编程思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/29/%E7%A9%BA%E5%BF%83%E9%87%91%E5%AD%97%E5%A1%94-Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">空心金字塔-Java编程思想</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
-
-        
-        <a href="/2021/12/29/%E7%A9%BA%E5%BF%83%E9%87%91%E5%AD%97%E5%A1%94-Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" class="archive-article-date">
-  	<time datetime="2021-12-29T13:35:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java编程思想-化繁为简，先死后活"><a href="#Java编程思想-化繁为简，先死后活" class="headerlink" title="Java编程思想-化繁为简，先死后活"></a>Java编程思想-化繁为简，先死后活</h1>
-        
-      
-
-      
-      
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/29/%E7%A9%BA%E5%BF%83%E9%87%91%E5%AD%97%E5%A1%94-Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E6%97%B6UML%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1.浏览器请求Servlet时UML流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8IDEA%E5%88%9B%E5%BB%BAServlet"><span class="toc-number">2.</span> <span class="toc-text">2.使用IDEA创建Servlet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-IDEA%E5%88%9B%E5%BB%BA%E6%96%B0servlet%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">1.IDEA创建新servlet类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-IDEA%E4%B8%AD%E9%87%8D%E5%86%99doGet%E5%92%8C%E9%83%BDPost%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.IDEA中重写doGet和都Post方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Servlet%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%BB%E6%9C%BAIP"><span class="toc-number">2.3.</span> <span class="toc-text">3.Servlet获取请求的主机IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AETomcat"><span class="toc-number">2.4.</span> <span class="toc-text">4.配置Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%AF%E5%8A%A8Tomcat%E5%90%8EAlt-R%E9%80%89%E6%8B%A9redeploy%E6%AF%94%E8%BE%83%E5%BF%AB"><span class="toc-number">2.5.</span> <span class="toc-text">5.启动Tomcat后Alt_R选择redeploy比较快</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
+  
+  
+  
 
+  
 
+  
 
+  
 
 
   
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "Jej1SFct4tsDn36PPuPj46Y1-gzGzoHsz",
+    app_key: "5PfOnDrigiIVMk8j3EgjRhmb",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+    </section>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
-
-        
-        <a href="/2021/12/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-12-27T14:39:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="我的博客文章编写"><a href="#我的博客文章编写" class="headerlink" title="我的博客文章编写"></a>我的博客文章编写</h1>
-        
-      
-
-      
-      
-      
-      <!-- 增加版权声明 -->
-
-      
-      
-      <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
 
 
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/27/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-  
-  
 
 
           </div>
@@ -781,8 +449,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
