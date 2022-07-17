@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>浏览器请求Servlet及IDEA创建Servlet | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.浏览器请求Servlet时UML流程图  2.使用IDEA创建Servlet1.IDEA创建新servlet类   2.IDEA中重写doGet和都Post方法  3.Servlet获取请求的主机IP   4.配置Tomcat  5.启动Tomcat后Alt_R选择redeploy比较快">
+  <meta name="description" content="1.浏览器请求Servlet时UML流程图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器请求Servlet及IDEA创建Servlet">
 <meta property="og:url" content="http://example.com/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.浏览器请求Servlet时UML流程图  2.使用IDEA创建Servlet1.IDEA创建新servlet类   2.IDEA中重写doGet和都Post方法  3.Servlet获取请求的主机IP   4.配置Tomcat  5.启动Tomcat后Alt_R选择redeploy比较快">
+<meta property="og:description" content="1.浏览器请求Servlet时UML流程图">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2022/07/17/Lt6B2UF9TwGAbnk.png">
 <meta property="og:image" content="https://s2.loli.net/2022/07/17/V2DCwQyvsXhr9YZ.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/07/17/xUVcIhFltHEgGuk.png">
 <meta property="og:image" content="https://s2.loli.net/2022/07/17/bBl8SwDso2y35c7.png">
 <meta property="article:published_time" content="2022-07-17T08:14:12.000Z">
-<meta property="article:modified_time" content="2022-07-17T08:42:36.507Z">
+<meta property="article:modified_time" content="2022-07-17T08:49:18.322Z">
 <meta property="article:author" content="pengzhao2013">
 <meta property="article:tag" content="java web">
 <meta name="twitter:card" content="summary">
@@ -209,12 +209,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-浏览器请求Servlet时UML流程图"><a href="#1-浏览器请求Servlet时UML流程图" class="headerlink" title="1.浏览器请求Servlet时UML流程图"></a>1.浏览器请求Servlet时UML流程图</h1><p><img src="https://s2.loli.net/2022/07/17/Lt6B2UF9TwGAbnk.png" alt="浏览器请求servletUML分析.png"> </p>
+        <h1 id="1-浏览器请求Servlet时UML流程图"><a href="#1-浏览器请求Servlet时UML流程图" class="headerlink" title="1.浏览器请求Servlet时UML流程图"></a>1.浏览器请求Servlet时UML流程图</h1><span id="more"></span>
+<p><img src="https://s2.loli.net/2022/07/17/Lt6B2UF9TwGAbnk.png" alt="浏览器请求servletUML分析.png"> </p>
 <h1 id="2-使用IDEA创建Servlet"><a href="#2-使用IDEA创建Servlet" class="headerlink" title="2.使用IDEA创建Servlet"></a>2.使用IDEA创建Servlet</h1><h2 id="1-IDEA创建新servlet类"><a href="#1-IDEA创建新servlet类" class="headerlink" title="1.IDEA创建新servlet类"></a>1.IDEA创建新servlet类</h2><p><img src="https://s2.loli.net/2022/07/17/V2DCwQyvsXhr9YZ.png" alt="1.IDEA创建新servlet类">  </p>
-<h2 id="2-IDEA中重写doGet和都Post方法"><a href="#2-IDEA中重写doGet和都Post方法" class="headerlink" title="2.IDEA中重写doGet和都Post方法"></a>2.IDEA中重写doGet和都Post方法</h2><p><img src="https://s2.loli.net/2022/07/17/4ZMTRhrgnloep6F.png" alt="2.IDEA中重写doGet和都Post方法.png"> </p>
+<h2 id="2-IDEA中重写doGet和doPost方法"><a href="#2-IDEA中重写doGet和doPost方法" class="headerlink" title="2.IDEA中重写doGet和doPost方法"></a>2.IDEA中重写doGet和doPost方法</h2><p><img src="https://s2.loli.net/2022/07/17/4ZMTRhrgnloep6F.png" alt="2.IDEA中重写doGet和都Post方法.png"> </p>
 <h2 id="3-Servlet获取请求的主机IP"><a href="#3-Servlet获取请求的主机IP" class="headerlink" title="3.Servlet获取请求的主机IP"></a>3.Servlet获取请求的主机IP</h2><p><img src="https://s2.loli.net/2022/07/17/dtgmBoiHSXvQauA.png" alt="3.Servlet获取请求的主机IP.png">  </p>
 <h2 id="4-配置Tomcat"><a href="#4-配置Tomcat" class="headerlink" title="4.配置Tomcat"></a>4.配置Tomcat</h2><p><img src="https://s2.loli.net/2022/07/17/xUVcIhFltHEgGuk.png" alt="4.配置Tomcat.png"> </p>
-<h2 id="5-启动Tomcat后Alt-R选择redeploy比较快"><a href="#5-启动Tomcat后Alt-R选择redeploy比较快" class="headerlink" title="5.启动Tomcat后Alt_R选择redeploy比较快"></a>5.启动Tomcat后Alt_R选择redeploy比较快</h2><p><img src="https://s2.loli.net/2022/07/17/bBl8SwDso2y35c7.png" alt="5.启动Tomcat后Alt_R选择redeploy比较快.png"></p>
+<h2 id="5-启动Tomcat后Alt-R选择redeploy比较快"><a href="#5-启动Tomcat后Alt-R选择redeploy比较快" class="headerlink" title="5.启动Tomcat后Alt+R选择redeploy比较快"></a>5.启动Tomcat后Alt+R选择redeploy比较快</h2><p><img src="https://s2.loli.net/2022/07/17/bBl8SwDso2y35c7.png" alt="5.启动Tomcat后Alt_R选择redeploy比较快.png"></p>
 
       
 
@@ -372,7 +373,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E6%97%B6UML%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1.浏览器请求Servlet时UML流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8IDEA%E5%88%9B%E5%BB%BAServlet"><span class="toc-number">2.</span> <span class="toc-text">2.使用IDEA创建Servlet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-IDEA%E5%88%9B%E5%BB%BA%E6%96%B0servlet%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">1.IDEA创建新servlet类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-IDEA%E4%B8%AD%E9%87%8D%E5%86%99doGet%E5%92%8C%E9%83%BDPost%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.IDEA中重写doGet和都Post方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Servlet%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%BB%E6%9C%BAIP"><span class="toc-number">2.3.</span> <span class="toc-text">3.Servlet获取请求的主机IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AETomcat"><span class="toc-number">2.4.</span> <span class="toc-text">4.配置Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%AF%E5%8A%A8Tomcat%E5%90%8EAlt-R%E9%80%89%E6%8B%A9redeploy%E6%AF%94%E8%BE%83%E5%BF%AB"><span class="toc-number">2.5.</span> <span class="toc-text">5.启动Tomcat后Alt_R选择redeploy比较快</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E6%97%B6UML%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1.浏览器请求Servlet时UML流程图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8IDEA%E5%88%9B%E5%BB%BAServlet"><span class="toc-number">2.</span> <span class="toc-text">2.使用IDEA创建Servlet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-IDEA%E5%88%9B%E5%BB%BA%E6%96%B0servlet%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">1.IDEA创建新servlet类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-IDEA%E4%B8%AD%E9%87%8D%E5%86%99doGet%E5%92%8CdoPost%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.IDEA中重写doGet和doPost方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Servlet%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E4%B8%BB%E6%9C%BAIP"><span class="toc-number">2.3.</span> <span class="toc-text">3.Servlet获取请求的主机IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AETomcat"><span class="toc-number">2.4.</span> <span class="toc-text">4.配置Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%90%AF%E5%8A%A8Tomcat%E5%90%8EAlt-R%E9%80%89%E6%8B%A9redeploy%E6%AF%94%E8%BE%83%E5%BF%AB"><span class="toc-number">2.5.</span> <span class="toc-text">5.启动Tomcat后Alt+R选择redeploy比较快</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
