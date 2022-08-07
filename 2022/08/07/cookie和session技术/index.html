@@ -6,23 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Java web html小结 | Hexo</title>
+  <title>cookie和session技术 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.IDEA创建Servlet小结">
+  <meta name="description" content="1.Cookie技术 1.cookie结构：k-v 都是String类型    2.服务端创建后返回给浏览器&#x2F;客户端保存 [http 响应包会有Set-Cookie:xxx]  1234&#x2F;&#x2F;如何将一个Cookie 添加到客户端response.addCookie(c);&#x2F;&#x2F;如何读取cookie(在服务器端读取到cookie 信息)request.getCookies();   3.启动Tomca">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java web html小结">
-<meta property="og:url" content="http://example.com/2022/07/21/Java-web-html%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:title" content="cookie和session技术">
+<meta property="og:url" content="http://example.com/2022/08/07/cookie%E5%92%8Csession%E6%8A%80%E6%9C%AF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.IDEA创建Servlet小结">
+<meta property="og:description" content="1.Cookie技术 1.cookie结构：k-v 都是String类型    2.服务端创建后返回给浏览器&#x2F;客户端保存 [http 响应包会有Set-Cookie:xxx]  1234&#x2F;&#x2F;如何将一个Cookie 添加到客户端response.addCookie(c);&#x2F;&#x2F;如何读取cookie(在服务器端读取到cookie 信息)request.getCookies();   3.启动Tomca">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/t1hm6jxoCHuRfl8.png">
-<meta property="og:image" content="https://s2.loli.net/2022/07/21/YoHFwn6aO31rJ8P.png">
-<meta property="article:published_time" content="2022-07-21T13:30:27.000Z">
-<meta property="article:modified_time" content="2022-07-21T14:22:14.913Z">
+<meta property="og:image" content="https://s2.loli.net/2022/08/07/Oej1LSwFabDWsti.png">
+<meta property="article:published_time" content="2022-08-07T11:10:21.000Z">
+<meta property="article:modified_time" content="2022-08-07T13:21:12.871Z">
 <meta property="article:author" content="pengzhao2013">
-<meta property="article:tag" content="Java Web">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/07/21/t1hm6jxoCHuRfl8.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/07/Oej1LSwFabDWsti.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -173,14 +171,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-web-html小结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cookie和session技术" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java web html小结
+      cookie和session技术
     </h1>
   
 
@@ -197,35 +195,61 @@
         <!--显示阅读次数完毕-->
 
         
-        <a href="/2022/07/21/Java-web-html%E5%B0%8F%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2022-07-21T13:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-21</time>
+        <a href="/2022/08/07/cookie%E5%92%8Csession%E6%8A%80%E6%9C%AF/" class="archive-article-date">
+  	<time datetime="2022-08-07T11:10:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-IDEA创建Servlet小结"><a href="#1-IDEA创建Servlet小结" class="headerlink" title="1.IDEA创建Servlet小结"></a>1.IDEA创建Servlet小结</h1><span id="more"></span>
-<blockquote>
-<p>1.创建Java项目，add framework </p>
+        <span id="more"></span>
+<h1 id="1-Cookie技术"><a href="#1-Cookie技术" class="headerlink" title="1.Cookie技术"></a>1.Cookie技术</h1><blockquote>
+<p>1.cookie结构：k-v 都是String类型 </p>
 </blockquote>
 <blockquote>
-<p>2.web目录下添加lib目录，引入tomcat api </p>
+<p>2.服务端创建后返回给浏览器/客户端保存 [http 响应包会有Set-Cookie:xxx]</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如何将一个Cookie 添加到客户端</span></span><br><span class="line">response.addCookie(c);</span><br><span class="line"><span class="comment">//如何读取cookie(在服务器端读取到cookie 信息)</span></span><br><span class="line">request.getCookies();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>3.启动Tomcat后只有首先访问默认的jsp页面才会生成JSESSIONID，JSESSIONID是本次会话的id </p>
 </blockquote>
 <blockquote>
-<p>3.配置Tomcat Server(注意不要是Tomcat EE Server) </p>
+<p>4.Cookie生命周期：setMaxAge() 单位是秒 </p>
 </blockquote>
 <blockquote>
-<p>4.编写Servlet </p>
+<p>5.Cookie有效路径：<br>当该请求路径包含该cookie的有效路径时，该cookie会发给服务器 </p>
 </blockquote>
-<h1 id="2-Tomcat启动乱码"><a href="#2-Tomcat启动乱码" class="headerlink" title="2.Tomcat启动乱码"></a>2.Tomcat启动乱码</h1><p><img src="https://s2.loli.net/2022/07/21/t1hm6jxoCHuRfl8.png" alt="Tomcat启动乱码.png"><br>参考链接：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/gao_zhennan/article/details/123990981">tomcat命令行下启动中文乱码(解释原理版)</a> </p>
-<p>大意是不管是GBK还是UTF-8编码的Java文件，生成的.class文件都是UTF-8编码的；但是JDK执行.class文件时，又编码器按照指定的编码格式编码，之后再由解码器按照指定的格式解码。 </p>
-<p>总之，<strong>如果解码输出源中字符使用的编码规则与编码时一致或者兼容，就不会发生乱码</strong> </p>
-<h1 id="3-一个排序问题"><a href="#3-一个排序问题" class="headerlink" title="3. 一个排序问题"></a>3. 一个排序问题</h1><p>公司组织了一个前端的竞赛，需要将一组汉字中的几个字按正确顺序排序并且这几个字放到最前面。 </p>
-<p>提示：只用CSS，将每个汉字div元素设置为FlexBox属性，并通过:nth-child选择中间的那几个汉字，设置order </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>order<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-class">.flex-container</span>&#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="comment">/*对以block为类名的元素进行添加样式*/</span></span></span><br><span class="line"><span class="css">        <span class="selector-class">.block</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="css">            <span class="attribute">order</span>: <span class="number">3</span>; //其他元素<span class="attribute">order</span>是<span class="number">3</span></span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.flex-container</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">5</span>) &#123;<span class="comment">/*css中的nth-child是从1开始算起*/</span></span></span><br><span class="line"><span class="css">            <span class="attribute">order</span>: <span class="number">2</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.flex-container</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">6</span>) &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">order</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>瑞<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>士<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>机<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>床<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>京<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>北<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>展<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>览<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;block font&quot;</span>&gt;</span>会<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>展示的页面：<br><img src="https://s2.loli.net/2022/07/21/YoHFwn6aO31rJ8P.png" alt="FlexBox.png"><br>参考链接：<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/css/css3_flexbox.asp">https://www.w3school.com.cn/css/css3_flexbox.asp</a> </p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child">https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cookie1.setPath = /工程路径</span><br><span class="line">cookie2.setPath = /工程路径/aaa</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>6.cookie中文乱码解决 </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">String urlName = URLEncoder.encode(<span class="string">&quot;韩顺平教育&quot;</span>, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//加入到cookie中 </span></span><br><span class="line">Cookie nameCookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;edu&quot;</span>, urlName);</span><br><span class="line"><span class="comment">//添加cookie</span></span><br><span class="line">response.addCookie(nameCookie);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//读取该cookie:</span></span><br><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">PrintWriter writer = response.getWriter();</span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line"><span class="comment">//处理的中文乱码问题</span></span><br><span class="line"><span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">writer.println(<span class="string">&quot;Cookie[&quot;</span> + cookie.getName()</span><br><span class="line">+ <span class="string">&quot;=&quot;</span> +</span><br><span class="line">URLDecoder.decode(cookie.getValue(),<span class="string">&quot;utf-8&quot;</span>) + <span class="string">&quot;] &lt;br/&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-Session技术"><a href="#2-Session技术" class="headerlink" title="2.Session技术"></a>2.Session技术</h1><blockquote>
+<p>1.服务器端为每个JSESSIONID生成一个session对象，一次会话中只有一个session对象 </p>
+</blockquote>
+<blockquote>
+<p>2.session 对象默认存在时间为30min </p>
+</blockquote>
+<blockquote>
+<p>3.session对象&lt;String,Object&gt; </p>
+</blockquote>
+<blockquote>
+<p>4.session API</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HttpSession hs=request.getSession();</span><br><span class="line">hs.setAttribute(String name,Object val);</span><br><span class="line">Object obj=hs.getAttribute(String name);</span><br><span class="line">hs.removeAttribute(String name);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>5.启动Tomcat后只有首先访问默认的jsp页面才会生成JSESSIONID 因此Tomcat redeploy后访问servlet时是没有JSESSIONID的<br><img src="https://s2.loli.net/2022/08/07/Oej1LSwFabDWsti.png" alt="创建session流程.png"> </p>
+</blockquote>
+<blockquote>
+<p>6.使用Tomcat封装的request对象获取参数时，若参数中存在中文，需要设置request接收的编码： </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginCheckServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;LoginCheckServlet 被调用...&quot;</span>);</span><br><span class="line">        <span class="comment">//请求转发到error.html</span></span><br><span class="line">        <span class="comment">//request.getRequestDispatcher(&quot;/error.html&quot;).forward(request,response);</span></span><br><span class="line">        request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;username= &quot;</span> + username);</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;666666&quot;</span>.equals(password)) &#123;</span><br><span class="line">            HttpSession session = request.getSession();</span><br><span class="line">            System.out.println(<span class="string">&quot;LoginCheckServlet sessionid= &quot;</span> + session.getId());</span><br><span class="line">            session.setAttribute(<span class="string">&quot;username&quot;</span>,username);</span><br><span class="line">            <span class="comment">//请求转发到manageServlet</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/manageServlet&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//给浏览器返回信息</span></span><br><span class="line">            <span class="comment">//请求转发到error.html</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/error.html&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManageServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        System.out.println(<span class="string">&quot;ManageServlet sessionid= &quot;</span> + session.getId());</span><br><span class="line">        <span class="comment">//2.读取属性</span></span><br><span class="line">        String username = (String)session.getAttribute(<span class="string">&quot;username&quot;</span>);</span><br><span class="line"><span class="comment">//        String urlName = URLEncoder.encode(username, &quot;utf-8&quot;);</span></span><br><span class="line">        <span class="keyword">if</span> (username != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;session属性 username= &quot;</span> + username);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//给浏览器返回信息</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">            PrintWriter writer = response.getWriter();</span><br><span class="line">            writer.println(<span class="string">&quot;欢迎你：管理员 &quot;</span> + username);</span><br><span class="line">            writer.flush();</span><br><span class="line">            writer.close();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//重新登录--&gt;请求重定向</span></span><br><span class="line"><span class="comment">//            request.getRequestDispatcher(&quot;/error.html&quot;).forward(request,response);</span></span><br><span class="line">            response.sendRedirect(<span class="string">&quot;/cs/userlogin.html&quot;</span>);<span class="comment">//被浏览器解析</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
       
 
@@ -279,17 +303,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -340,7 +353,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pengzhao2013.github.io/022/07/21/Java-web-html%E5%B0%8F%E7%BB%93/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pengzhao2013.github.io/022/08/07/cookie%E5%92%8Csession%E6%8A%80%E6%9C%AF/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -354,18 +367,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2022/08/03/web%E8%B7%AF%E5%BE%84%E4%B8%93%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          web路径专题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/07/20/http%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%E5%8F%8Ahttp%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%B4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">http请求方式及http请求头和响应头</div>
+    <a href="/2022/08/03/web%E8%B7%AF%E5%BE%84%E4%B8%93%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">web路径专题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -392,7 +396,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-IDEA%E5%88%9B%E5%BB%BAServlet%E5%B0%8F%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">1.IDEA创建Servlet小结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Tomcat%E5%90%AF%E5%8A%A8%E4%B9%B1%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">2.Tomcat启动乱码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E4%B8%80%E4%B8%AA%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">3. 一个排序问题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Cookie%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">1.Cookie技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Session%E6%8A%80%E6%9C%AF"><span class="toc-number">2.</span> <span class="toc-text">2.Session技术</span></a></li></ol>
                     </div>
                 </span>
             </div>
