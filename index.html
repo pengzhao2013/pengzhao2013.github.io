@@ -292,54 +292,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
-<h1 id="1-Cookie技术"><a href="#1-Cookie技术" class="headerlink" title="1.Cookie技术"></a>1.Cookie技术</h1><blockquote>
-<p>1.cookie结构：k-v 都是String类型 </p>
-</blockquote>
-<blockquote>
-<p>2.服务端创建后返回给浏览器/客户端保存 [http 响应包会有Set-Cookie:xxx]</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如何将一个Cookie 添加到客户端</span></span><br><span class="line">response.addCookie(c);</span><br><span class="line"><span class="comment">//如何读取cookie(在服务器端读取到cookie 信息)</span></span><br><span class="line">request.getCookies();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>3.启动Tomcat后只有首先访问默认的jsp页面才会生成JSESSIONID，JSESSIONID是本次会话的id </p>
-</blockquote>
-<blockquote>
-<p>4.Cookie生命周期：setMaxAge() 单位是秒 </p>
-</blockquote>
-<blockquote>
-<p>5.Cookie有效路径：<br>当该请求路径包含该cookie的有效路径时，该cookie会发给服务器 </p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cookie1.setPath = /工程路径</span><br><span class="line">cookie2.setPath = /工程路径/aaa</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>6.cookie中文乱码解决 </p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">String urlName = URLEncoder.encode(<span class="string">&quot;韩顺平教育&quot;</span>, <span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line"><span class="comment">//加入到cookie中 </span></span><br><span class="line">Cookie nameCookie = <span class="keyword">new</span> Cookie(<span class="string">&quot;edu&quot;</span>, urlName);</span><br><span class="line"><span class="comment">//添加cookie</span></span><br><span class="line">response.addCookie(nameCookie);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//读取该cookie:</span></span><br><span class="line">response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">PrintWriter writer = response.getWriter();</span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line"><span class="comment">//处理的中文乱码问题</span></span><br><span class="line"><span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">writer.println(<span class="string">&quot;Cookie[&quot;</span> + cookie.getName()</span><br><span class="line">+ <span class="string">&quot;=&quot;</span> +</span><br><span class="line">URLDecoder.decode(cookie.getValue(),<span class="string">&quot;utf-8&quot;</span>) + <span class="string">&quot;] &lt;br/&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-Session技术"><a href="#2-Session技术" class="headerlink" title="2.Session技术"></a>2.Session技术</h1><blockquote>
-<p>1.服务器端为每个JSESSIONID生成一个session对象，一次会话中只有一个session对象 </p>
-</blockquote>
-<blockquote>
-<p>2.session 对象默认存在时间为30min </p>
-</blockquote>
-<blockquote>
-<p>3.session对象&lt;String,Object&gt; </p>
-</blockquote>
-<blockquote>
-<p>4.session API</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HttpSession hs=request.getSession();</span><br><span class="line">hs.setAttribute(String name,Object val);</span><br><span class="line">Object obj=hs.getAttribute(String name);</span><br><span class="line">hs.removeAttribute(String name);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>5.启动Tomcat后只有首先访问默认的jsp页面才会生成JSESSIONID 因此Tomcat redeploy后访问servlet时是没有JSESSIONID的<br><img src="https://s2.loli.net/2022/08/07/Oej1LSwFabDWsti.png" alt="创建session流程.png"> </p>
-</blockquote>
-<blockquote>
-<p>6.使用Tomcat封装的request对象获取参数时，若参数中存在中文，需要设置request接收的编码： </p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginCheckServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;LoginCheckServlet 被调用...&quot;</span>);</span><br><span class="line">        <span class="comment">//请求转发到error.html</span></span><br><span class="line">        <span class="comment">//request.getRequestDispatcher(&quot;/error.html&quot;).forward(request,response);</span></span><br><span class="line">        request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        String username = request.getParameter(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">        String password = request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;username= &quot;</span> + username);</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;666666&quot;</span>.equals(password)) &#123;</span><br><span class="line">            HttpSession session = request.getSession();</span><br><span class="line">            System.out.println(<span class="string">&quot;LoginCheckServlet sessionid= &quot;</span> + session.getId());</span><br><span class="line">            session.setAttribute(<span class="string">&quot;username&quot;</span>,username);</span><br><span class="line">            <span class="comment">//请求转发到manageServlet</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/manageServlet&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//给浏览器返回信息</span></span><br><span class="line">            <span class="comment">//请求转发到error.html</span></span><br><span class="line">            request.getRequestDispatcher(<span class="string">&quot;/error.html&quot;</span>).forward(request,response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManageServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        System.out.println(<span class="string">&quot;ManageServlet sessionid= &quot;</span> + session.getId());</span><br><span class="line">        <span class="comment">//2.读取属性</span></span><br><span class="line">        String username = (String)session.getAttribute(<span class="string">&quot;username&quot;</span>);</span><br><span class="line"><span class="comment">//        String urlName = URLEncoder.encode(username, &quot;utf-8&quot;);</span></span><br><span class="line">        <span class="keyword">if</span> (username != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;session属性 username= &quot;</span> + username);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//给浏览器返回信息</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;text/html;charset=utf-8&quot;</span>);</span><br><span class="line">            PrintWriter writer = response.getWriter();</span><br><span class="line">            writer.println(<span class="string">&quot;欢迎你：管理员 &quot;</span> + username);</span><br><span class="line">            writer.flush();</span><br><span class="line">            writer.close();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//重新登录--&gt;请求重定向</span></span><br><span class="line"><span class="comment">//            request.getRequestDispatcher(&quot;/error.html&quot;).forward(request,response);</span></span><br><span class="line">            response.sendRedirect(<span class="string">&quot;/cs/userlogin.html&quot;</span>);<span class="comment">//被浏览器解析</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        doPost(request,response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+        <h1 id="1-Cookie技术"><a href="#1-Cookie技术" class="headerlink" title="1.Cookie技术"></a>1.Cookie技术</h1>
+        
       
 
       
@@ -1271,11 +1225,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">java web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java web</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
