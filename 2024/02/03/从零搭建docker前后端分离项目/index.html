@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/shouye.jpg">
 <meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E7%94%9F%E4%BA%A7%E4%B8%AD%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B.jpg">
 <meta property="article:published_time" content="2024-02-03T02:02:24.000Z">
-<meta property="article:modified_time" content="2024-02-03T15:06:42.934Z">
+<meta property="article:modified_time" content="2024-02-03T15:10:34.833Z">
 <meta property="article:author" content="pengzhao2013">
 <meta property="article:tag" content="项目搭建部署">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
 <h1 id="三、生产中打包流程"><a href="#三、生产中打包流程" class="headerlink" title="三、生产中打包流程"></a>三、生产中打包流程</h1><p><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E7%94%9F%E4%BA%A7%E4%B8%AD%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B.jpg"></p>
 <h1 id="四、推送到dockerhub"><a href="#四、推送到dockerhub" class="headerlink" title="四、推送到dockerhub"></a>四、推送到dockerhub</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker login</span><br><span class="line">docker images</span><br><span class="line">cd /usr/blog</span><br><span class="line">docker build -t zhaopeng008/sg_blog:01 -f spring_boot_dockerFile.txt .</span><br><span class="line">docker tag zhaopeng008/sg_blog:01 zhaopeng008/sg_blog:01</span><br><span class="line">docker push zhaopeng008/sg_blog:01</span><br></pre></td></tr></table></figure>
 <h1 id="五、Docker-Compose"><a href="#五、Docker-Compose" class="headerlink" title="五、Docker Compose"></a>五、Docker Compose</h1><blockquote>
-<p>多个容器应用启动时可以采用docker-compose.yaml文件中添加，统一采用<code>docker compose up -d</code>启动，可以统一采用<code>docker compose down</code>停止。（老版本采用<code>docker-compose up - d</code>）<br>docker-compose.yaml定义四个服务：</p>
+<p>多个容器应用启动时可以采用docker-compose.yaml文件中添加，统一采用<code>docker compose up -d</code>启动，可以统一采用<code>docker compose down</code>停止。（老版本采用<code>docker-compose up - d</code>）<br>其实就是把之前docker run的语法翻译成docker-compse.yaml的语法<br>docker-compose.yaml定义四个服务：</p>
 </blockquote>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># mysql</span></span><br><span class="line">  <span class="attr">blog_mysql:</span> <span class="comment"># 服务名，不需要再定义容器名，否则不同的容器名冲突时会报错</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql_data:/var/lib/mysql</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3306</span><span class="string">:3306</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">blog_net</span></span><br><span class="line">  <span class="comment"># redis</span></span><br><span class="line">  <span class="attr">blog_redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis:7.0</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis_data:/data</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">6379</span><span class="string">:6379</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;redis-server&quot;</span>, <span class="string">&quot;--appendonly&quot;</span>, <span class="string">&quot;yes&quot;</span>]</span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">blog_net</span></span><br><span class="line">  <span class="comment"># 后端服务</span></span><br><span class="line">  <span class="attr">sg_blog:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sg_blog:01</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">7777</span><span class="string">:7777</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">blog_net</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">  <span class="comment"># 前端服务</span></span><br><span class="line">  <span class="attr">sg_blog_vue:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sg_blog_vue:01</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line"><span class="comment"># 声明使用到的容器卷和网络模式名</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">blog_net:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">redis_data:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mysql_data:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span> <span class="comment"># 用已经存在的数据卷别名，否则会在数据卷别名上添加前缀</span></span><br></pre></td></tr></table></figure>
 
@@ -576,15 +576,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring Boot Thymeleaf</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,11 +604,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java编程</a>
+                <a href="javascript:void(0)" class="js-tag color4">java数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java编程</a>
               </li>
              
               <li class="article-tag-list-item">
