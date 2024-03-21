@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一次工作中@Validated注解校验失效的经历">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D.jpg">
-<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%90%8E.jpg">
+<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D111.jpg">
+<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%90%8E111.jpg">
 <meta property="article:published_time" content="2024-03-18T14:02:50.000Z">
-<meta property="article:modified_time" content="2024-03-18T14:33:03.105Z">
+<meta property="article:modified_time" content="2024-03-21T14:02:56.294Z">
 <meta property="article:author" content="pengzhao2013">
 <meta property="article:tag" content="工作中踩过的坑">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D.jpg">
+<meta name="twitter:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D111.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -209,7 +209,7 @@
 <p>工作中一个接口有三个实现类分别完成三种不同类型功能，在controller层直接根据用户传参类型枚举值选择对应的实现类，并且每个实现类的该方法上标注有@Validated注解对传入的dto对象进行分组校验。</p>
 <p>由于三种实现类的实现方法有基本相同的操作步骤，首先对各种不同的场景传入的dto进行各项参数比如data的json串进行加密后SM3签名校验，手机号进行SM2解密后根据手机号去数据库查询需要的数据，第二步是获取需要的数据后构造新的数据，第三步根据构造的新数据入库并返回用户需要的字段。我接手的新需求需要对第三步进行修改原有代码逻辑，由于该业务逻辑符合模板模式，故对原有代码进行模板模式的改造。</p>
 <blockquote>
-<p>模板模式改造前：<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D.jpg"><br>模板模式改造后：<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%90%8E.jpg"><br>改造后@Validated注解校验失效</p>
+<p>模板模式改造前：<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%89%8D111.jpg"><br>模板模式改造后：<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/%E6%A8%A1%E6%9D%BF%E6%A8%A1%E5%BC%8F%E6%94%B9%E9%80%A0%E5%90%8E111.jpg"><br>改造后@Validated注解校验失效</p>
 </blockquote>
 <h2 id="方法内调用导致注解失效"><a href="#方法内调用导致注解失效" class="headerlink" title="方法内调用导致注解失效"></a>方法内调用导致注解失效</h2><p>组内架构师刚开始也不明白为什么@Validated会失效，后来联想到@Transactional注解失效的机制，原来@Validated方法内调用也会失效。<br>原理如该链接所示：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Ahuuua/article/details/123877835">@Transactional类内部访问失效原因详解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ahuuua/article/details/123876919">@Transactional 失效的几种情况</a></p>
 
@@ -524,11 +524,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IDEA工具设置</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+                <a href="javascript:void(0)" class="js-tag color4">IDEA工具设置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,11 +544,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java web</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">java web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,10 +560,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">工作技巧总结</a>
               </li>
              
@@ -572,15 +568,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Eureka</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git原理及操作入门</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git原理及操作入门</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
