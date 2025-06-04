@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022/7 | Hexo</title>
+  <title>docker安装mysdql总挂解决方案 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2022/07/index.html">
+  <meta name="description" content="1.mysql8 docker容器总是报mbind:Operation not permitted">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装mysdql总挂解决方案">
+<meta property="og:url" content="http://example.com/2025/06/04/docker%E5%AE%89%E8%A3%85mysdql%E6%80%BB%E6%8C%82%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.mysql8 docker容器总是报mbind:Operation not permitted">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/mbind%E9%97%AE%E9%A2%98.jpg">
+<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/Forcing_close_by_root.png">
+<meta property="article:published_time" content="2025-06-04T13:42:06.000Z">
+<meta property="article:modified_time" content="2025-06-04T14:28:00.661Z">
 <meta property="article:author" content="pengzhao2013">
+<meta property="article:tag" content="docker mysql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/mbind%E9%97%AE%E9%A2%98.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -165,174 +173,288 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-docker安装mysdql总挂解决方案" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker安装mysdql总挂解决方案
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+          <br/>
+          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+          <span class="icon-sort"></span>
+          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+          </span>
+          </a>
+        
+        <!--显示阅读次数完毕-->
+
+        
+        <a href="/2025/06/04/docker%E5%AE%89%E8%A3%85mysdql%E6%80%BB%E6%8C%82%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="archive-article-date">
+  	<time datetime="2025-06-04T13:42:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-04</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-mysql8-docker容器总是报mbind-Operation-not-permitted"><a href="#1-mysql8-docker容器总是报mbind-Operation-not-permitted" class="headerlink" title="1.mysql8 docker容器总是报mbind:Operation not permitted"></a>1.mysql8 docker容器总是报mbind:Operation not permitted</h2><span id="more"></span>
+<p>自己在服务器上使用docker容器部署的mysql8服务总是一段时间后挂掉，查看日志总是打印mbind: operation not permitted，之后接收到root指令进行shutdown<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/mbind%E9%97%AE%E9%A2%98.jpg"></p>
+<p>网上查找到原因：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Crayon26/article/details/146361987">Docker运行Mysql异常：Operation not permitted</a></p>
+<blockquote>
+<p>这可能由于之前MySQL容器非正常关闭（如崩溃、强制重启）或客户端未正常断开连接，导致异常开启了”符号链接”</p>
+</blockquote>
+<h3 id="解决方案①：修改配置文件"><a href="#解决方案①：修改配置文件" class="headerlink" title="解决方案①：修改配置文件"></a>解决方案①：修改配置文件</h3><p>删除MySQL配置文件（my.cnf 或 my.ini）中的 skip-symbolic-links 或 –skip-symbolic-links 参数。<br>配置文件路径通常为 <code>/etc/mysql/my.cnf</code> 或容器内的 <code>/etc/mysql/conf.d</code>。<br>修改后重启MySQL：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart mysql</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案②：修改容器内MySQL配置"><a href="#解决方案②：修改容器内MySQL配置" class="headerlink" title="解决方案②：修改容器内MySQL配置"></a>解决方案②：修改容器内MySQL配置</h3><p>若MySQL运行在Docker容器中（如镜像 swr.cn-south-1.myhuaweicloud.com/library/mysql:8.0），或找不到 my.cnf 与 my.ini 文件，那么就在启动容器时添加权限参数，允许执行 mbind 操作。</p>
+<p>启动容器时命令中挂载配置文件:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name mysql8<span class="number">.0</span> \</span><br><span class="line">-p <span class="number">3306</span>:<span class="number">3306</span> \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=<span class="number">123456</span> \</span><br><span class="line">-e TZ=Asia/Shanghai \</span><br><span class="line">--cap-add SYS_NICE \   # 允许NUMA内存操作</span><br><span class="line">--security-opt seccomp=unconfined \ # 禁用默认Seccomp限制</span><br><span class="line">mysql:<span class="number">8.0</span><span class="number">.27</span></span><br></pre></td></tr></table></figure>
+<p>但是第二天上午查看时mysql服务又挂了</p>
+<h2 id="2-mysql-shutdown之前日志报Forcing-close-of-thread-user-‘root’"><a href="#2-mysql-shutdown之前日志报Forcing-close-of-thread-user-‘root’" class="headerlink" title="2.mysql shutdown之前日志报Forcing close of thread user ‘root’"></a>2.mysql shutdown之前日志报Forcing close of thread user ‘root’</h2><p><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/Forcing_close_by_root.png"></p>
+<p>继续百度:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36949713/article/details/111500364">Mysql：Forcing close of thread xxx user: ‘root‘ 的解决方法</a></p>
+<blockquote>
+<p>这算属MySQL的一个bug，不管连接是通过hosts还是ip的方式，MySQL都会对DNS做反查，IP到DNS，由于反查的接续速度过慢（不管是不是isp提供的dns服务器的问题或者其他原因），大量的查询就难以应付，线程不够用就使劲增加线程，但是却得不到释放，所以MySQL会“ 假死”。</p>
+</blockquote>
+<blockquote>
+<p>解决的方案很简单，结束这个反查的过程，禁止任何解析。</p>
+</blockquote>
+<blockquote>
+<p>在[mysqld]下面增加一行：<br>skip-name-resolve</p>
+</blockquote>
+<blockquote>
+<p>window 在my.ini添加的内容:</p>
+</blockquote>
+<blockquote>
+<p>skip-locking</p>
+</blockquote>
+<blockquote>
+<p>skip-name-resolve</p>
+</blockquote>
+<p>重启MySQL即可<br>但是我是在容器中起的mysql服务，所以需要修改挂载到容器外面的配置文件<br>继续百度启动mysql8 docker容器时带容器卷映射的启动命令：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Assassinhanc/article/details/146361952">Linux 环境中安装 MySQL 8.0 的 Docker 部署详细步骤</a></p>
+<h3 id="1-创建docker网络"><a href="#1-创建docker网络" class="headerlink" title="1.创建docker网络"></a>1.创建docker网络</h3><p>为了后续部署其他服务（如后端应用）时要在同一台机器上访问mysql，就创建docker网络</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network create mysql-network</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建宿主机数据和配置目录（持久化数据）"><a href="#2-创建宿主机数据和配置目录（持久化数据）" class="headerlink" title="2.创建宿主机数据和配置目录（持久化数据）"></a>2.创建宿主机数据和配置目录（持久化数据）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建数据目录</span><br><span class="line">sudo mkdir -p /docker/mysql/data</span><br><span class="line"></span><br><span class="line"># 创建配置目录</span><br><span class="line">sudo mkdir -p /docker/mysql/conf</span><br><span class="line"></span><br><span class="line"># 创建自定义配置文件</span><br><span class="line">sudo touch /docker/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<h3 id="编辑mysql配置文件"><a href="#编辑mysql配置文件" class="headerlink" title="编辑mysql配置文件"></a>编辑mysql配置文件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /docker/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">skip-name-resolve # 这里加上之前百度的跳过DNS反查 默认是off关闭状态,skip-name-resolve=<span class="number">1</span>或skip-name-resolve=on或skip-name-resolve表示开启</span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line">collation-server=utf8mb4_unicode_ci</span><br><span class="line"><span class="keyword">default</span>-time-zone=+<span class="number">8</span>:<span class="number">00</span></span><br><span class="line"></span><br><span class="line">[client]</span><br><span class="line"><span class="keyword">default</span>-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line"><span class="keyword">default</span>-character-set=utf8mb4</span><br></pre></td></tr></table></figure>
+<p>最终的启动容器命令:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d \</span><br><span class="line">  --name mysql8<span class="number">.0</span> \</span><br><span class="line">  --restart=always \</span><br><span class="line">  --network mysql-network \</span><br><span class="line">  -p <span class="number">3306</span>:<span class="number">3306</span> \</span><br><span class="line">  -v /data/docker/mysql/data:/<span class="keyword">var</span>/lib/mysql \</span><br><span class="line">  -v /data/docker/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf \</span><br><span class="line">  -e MYSQL_ROOT_PASSWORD=your_strong_password \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  --cap-add SYS_NICE \</span><br><span class="line">  --security-opt seccomp=unconfined \</span><br><span class="line">  mysql:<span class="number">8.0</span><span class="number">.27</span></span><br></pre></td></tr></table></figure>
+<p>目前mysql8.0服务正常运行</p>
+
+      
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/07/21/Java-web-html%E5%B0%8F%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2022-07-21T13:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/07/21/Java-web-html%E5%B0%8F%E7%BB%93/">Java web html小结</a>
-    </h1>
-  
+      
+      <!-- 增加版权声明 -->
 
-        <div class="article-info info-on-right">
-          
+      
+      
+      <div class="declare" hidden="hidden"></div>
+      
+
+      <!-- 增加版权声明结束 -->
+
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">docker mysql</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pengzhao2013.github.io/025/06/04/docker%E5%AE%89%E8%A3%85mysdql%E6%80%BB%E6%8C%82%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/07/20/http%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%E5%8F%8Ahttp%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%B4/" class="archive-article-date">
-  	<time datetime="2022-07-20T13:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/18/%E6%96%B9%E6%B3%95%E5%86%85%E8%B0%83%E7%94%A8-Validated%E6%B3%A8%E8%A7%A3%E4%BF%AE%E9%A5%B0%E7%9A%84%E6%96%B9%E6%B3%95%E6%A0%A1%E9%AA%8C%E5%A4%B1%E6%95%88%E7%9A%84%E6%A1%88%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">方法内调用@Validated注解修饰的方法校验失效的案例</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/07/20/http%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%E5%8F%8Ahttp%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E5%93%8D%E5%BA%94%E5%A4%B4/">http请求方式及http请求头和响应头</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mysql8-docker%E5%AE%B9%E5%99%A8%E6%80%BB%E6%98%AF%E6%8A%A5mbind-Operation-not-permitted"><span class="toc-number">1.</span> <span class="toc-text">1.mysql8 docker容器总是报mbind:Operation not permitted</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%91%A0%EF%BC%9A%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">解决方案①：修改配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E2%91%A1%EF%BC%9A%E4%BF%AE%E6%94%B9%E5%AE%B9%E5%99%A8%E5%86%85MySQL%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">解决方案②：修改容器内MySQL配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-mysql-shutdown%E4%B9%8B%E5%89%8D%E6%97%A5%E5%BF%97%E6%8A%A5Forcing-close-of-thread-user-%E2%80%98root%E2%80%99"><span class="toc-number">2.</span> <span class="toc-text">2.mysql shutdown之前日志报Forcing close of thread user ‘root’</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAdocker%E7%BD%91%E7%BB%9C"><span class="toc-number">2.1.</span> <span class="toc-text">1.创建docker网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%AE%BF%E4%B8%BB%E6%9C%BA%E6%95%B0%E6%8D%AE%E5%92%8C%E9%85%8D%E7%BD%AE%E7%9B%AE%E5%BD%95%EF%BC%88%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2.创建宿主机数据和配置目录（持久化数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">编辑mysql配置文件</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/" class="archive-article-date">
-  	<time datetime="2022-07-17T08:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/07/17/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%B7%E6%B1%82Servlet%E5%8F%8AIDEA%E5%88%9B%E5%BB%BAServlet/">浏览器请求Servlet及IDEA创建Servlet</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">java web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2022-07-10T14:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/07/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E9%80%81html%E8%AF%B7%E6%B1%82%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">浏览器发送http请求到服务器</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "Jej1SFct4tsDn36PPuPj46Y1-gzGzoHsz",
+    app_key: "5PfOnDrigiIVMk8j3EgjRhmb",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+    </section>
+  
+
+
+
 
 
           </div>
@@ -367,8 +489,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
