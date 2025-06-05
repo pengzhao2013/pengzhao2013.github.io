@@ -292,43 +292,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <span id="more"></span>
-<h2 id="hexo-d推到github报错connect-to-host-github-com-port-22-Connection-refused"><a href="#hexo-d推到github报错connect-to-host-github-com-port-22-Connection-refused" class="headerlink" title="hexo d推到github报错connect to host github.com port 22: Connection refused"></a>hexo d推到github报错connect to host github.com port 22: Connection refused</h2><h3 id="第一篇博客"><a href="#第一篇博客" class="headerlink" title="第一篇博客"></a>第一篇博客</h3><p>首先参考了博客:<a target="_blank" rel="noopener" href="https://blog.csdn.net/Lorn25/article/details/147235443">ssh: connect to host github.com port 22: Connection refused解决方案</a><br>在“C:\Users\用户.ssh”下创建一个config文件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">Port <span class="number">443</span></span><br></pre></td></tr></table></figure>
-<p>但是之后在<code>.ssh</code>目录下执行命令<code>ssh -T git@github.com</code>一直报：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host ‘[ssh.github.com]:<span class="number">443</span> ([<span class="number">20.205</span><span class="number">.243</span><span class="number">.160</span>]:<span class="number">443</span>)’ can’t be established........</span><br></pre></td></tr></table></figure>
-<h3 id="第二篇博客"><a href="#第二篇博客" class="headerlink" title="第二篇博客"></a>第二篇博客</h3><p>于是找到了第二篇博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Archer314/p/14641310.html">解决ssh: connect to host github.com port 22: Connection refused</a><br>修改了配置文件:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com  </span><br><span class="line">User xxxxx<span class="meta">@xx</span>.com  	<span class="comment">//注册github的邮箱</span></span><br><span class="line">Hostname ssh.github.com  </span><br><span class="line">PreferredAuthentications publickey  </span><br><span class="line">IdentityFile ~/.ssh/id_rsa  </span><br><span class="line">Port <span class="number">443</span></span><br></pre></td></tr></table></figure>
-<p>之后执行<code>ssh -T git@github.com</code>还是不行<br>报Permission denied (publickey)</p>
-<h3 id="第三篇博客"><a href="#第三篇博客" class="headerlink" title="第三篇博客"></a>第三篇博客</h3><p>于是根据Permission denied (publickey)找到了第三篇博客：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/AHumanBeing/article/details/147659767">解决 GitHub 克隆项目时出现 “Permission denied (publickey)” 问题</a></p>
-<blockquote>
-<p>这个错误通常是因为 SSH 密钥配置问题导致的</p>
-</blockquote>
-<h4 id="出现这个错误的原因主要有以下几种："><a href="#出现这个错误的原因主要有以下几种：" class="headerlink" title="出现这个错误的原因主要有以下几种："></a>出现这个错误的原因主要有以下几种：</h4><blockquote>
-<p>1.SSH Key 未生成：本地客户端尚未生成 SSH Key，因此无法通过 SSH 方式与 GitHub 进行通信。</p>
-</blockquote>
-<blockquote>
-<p>2.SSH Key 未添加到 GitHub：虽然本地生成了 SSH Key，但未将其公钥添加到 GitHub 的账户设置中。</p>
-</blockquote>
-<blockquote>
-<p>3.SSH Key 不匹配：本地的 SSH Key 与 GitHub 上的公钥不匹配，可能是由于更换了设备或重新生成了 SSH Key。</p>
-</blockquote>
-<blockquote>
-<p>4.GitHub 账号权限问题：您可能没有权限访问该仓库，或者仓库不存在。</p>
-</blockquote>
-<p>于是登录github发现没有了最早之前配置的ssh key</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al ~/.ssh</span><br></pre></td></tr></table></figure>
-<p>虽然本地.ssh目录下有公钥和私钥文件，但是github上的ssh key已经失效了（没有了）<br>马上按照博客里的步骤重新生成ssh key:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-<p>执行三次回车，生成新的公私钥对</p>
-<blockquote>
-<p>打开生成的公钥文件，复制其内容</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub #cat是查看文件内容的命令</span><br></pre></td></tr></table></figure>
-<p>粘贴到github ssh key配置里<br>最后执行</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git<span class="meta">@github</span>.com</span><br></pre></td></tr></table></figure>
-<p>验证</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi username! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+        <h2 id="hexo-d推到github报错connect-to-host-github-com-port-22-Connection-refused"><a href="#hexo-d推到github报错connect-to-host-github-com-port-22-Connection-refused" class="headerlink" title="hexo d推到github报错connect to host github.com port 22: Connection refused"></a>hexo d推到github报错connect to host github.com port 22: Connection refused</h2>
+        
       
 
       
@@ -1293,7 +1258,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1301,11 +1266,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java web</a>
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">java web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1313,7 +1278,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">工作技巧总结</a>
+                <a href="javascript:void(0)" class="js-tag color2">java Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1321,11 +1286,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Eureka</a>
+                <a href="javascript:void(0)" class="js-tag color2">工作技巧总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1333,11 +1294,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git原理及操作入门</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color2">Eureka</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Git原理及操作入门</a>
               </li>
              
               <li class="article-tag-list-item">
