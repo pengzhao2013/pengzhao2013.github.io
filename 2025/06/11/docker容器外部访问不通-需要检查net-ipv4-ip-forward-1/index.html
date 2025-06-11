@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2023/11 | Hexo</title>
+  <title>docker容器外部访问不通-需要检查net.ipv4.ip_forward = 1 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2023/11/index.html">
+  <meta name="description" content="docker容器外部访问不通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker容器外部访问不通-需要检查net.ipv4.ip_forward &#x3D; 1">
+<meta property="og:url" content="http://example.com/2025/06/11/docker%E5%AE%B9%E5%99%A8%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A-%E9%9C%80%E8%A6%81%E6%A3%80%E6%9F%A5net-ipv4-ip-forward-1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="docker容器外部访问不通">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/docker%E5%AE%B9%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A.png">
+<meta property="article:published_time" content="2025-06-11T04:49:12.000Z">
+<meta property="article:modified_time" content="2025-06-11T05:00:55.442Z">
 <meta property="article:author" content="pengzhao2013">
+<meta property="article:tag" content="docker网络">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/docker%E5%AE%B9%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -165,136 +172,256 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-docker容器外部访问不通-需要检查net-ipv4-ip-forward-1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker容器外部访问不通-需要检查net.ipv4.ip_forward = 1
+    </h1>
+  
+
+        <!--显示阅读次数-->
+        
+          <br/>
+          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+          <span class="icon-sort"></span>
+          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+          </span>
+          </a>
+        
+        <!--显示阅读次数完毕-->
+
+        
+        <a href="/2025/06/11/docker%E5%AE%B9%E5%99%A8%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A-%E9%9C%80%E8%A6%81%E6%A3%80%E6%9F%A5net-ipv4-ip-forward-1/" class="archive-article-date">
+  	<time datetime="2025-06-11T04:49:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="docker容器外部访问不通"><a href="#docker容器外部访问不通" class="headerlink" title="docker容器外部访问不通"></a>docker容器外部访问不通</h2><span id="more"></span>
+<p>上午安装redis布隆过滤器后查看日志有报需要设置vm.overcommit_memory = 1，百度后可以通过在<code>/etc/sysctl.conf</code>文件末尾添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br><span class="line">vm.overcommit_memory = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>后执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>来永久生效。</p>
+<blockquote>
+<p>参数overcommit_memory：<br>overcommit的中文意思是过量使用，那overcommit_memory指的就是过量使用内存。<br>这个参数决定了操作系统在应对应用申请内存时是如果分配的。（为什么会过量使用，不应该是有多少使用多少吗？<br>因为在系统中并不是申请了多少内存就立即分配多少，有可能申请了10G，使用时仅分配了5G，<br>这样就有5G内存在应用运行期间暂时闲置。如果有大量应用申请内存，那么就会有很多暂时闲置的内存。）<br>内存申请不等于内存分配，内存只在实际用到的时候才分配。</p>
+</blockquote>
+<hr>
+<p>可能在修改该参数时修改到了net.ipv4.ip_forward还是啥原因，导致重启redis容器后，该服务器上所有开放端口外部都访问不通了。<br>最后找了腾讯云售后支持工程师现场登录我的机器才找到原因：<br><img src="https://picgo-zp.oss-cn-shanghai.aliyuncs.com/img/docker%E5%AE%B9%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A.png"><br>docker没有开启转发，需要修改该参数为1</p>
+
+      
+
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/11/26/ThreadLocal%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2023-11-26T03:35:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/11/26/ThreadLocal%E5%8E%9F%E7%90%86%E5%8F%8A%E5%BA%94%E7%94%A8/">ThreadLocal原理及应用</a>
-    </h1>
-  
+      
+      <!-- 增加版权声明 -->
 
-        <div class="article-info info-on-right">
-          
+      
+      
+      <div class="declare" hidden="hidden"></div>
+      
+
+      <!-- 增加版权声明结束 -->
+
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ThreadLocal</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">docker网络</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pengzhao2013.github.io/025/06/11/docker%E5%AE%B9%E5%99%A8%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A-%E9%9C%80%E8%A6%81%E6%A3%80%E6%9F%A5net-ipv4-ip-forward-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/11/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%88%98%E6%B5%B7%E6%B3%A2%E8%80%81%E5%B8%88%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Git%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2023-11-12T06:56:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2025/06/10/RocketMQ%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%8A%A5%E9%94%99RemotingTooMuchRequestException-invokeAsync-call-timeout/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RocketMQ发送消息报错RemotingTooMuchRequestException: invokeAsync call timeout</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/11/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E5%88%98%E6%B5%B7%E6%B3%A2%E8%80%81%E5%B8%88%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Git%E7%AC%94%E8%AE%B0/">尚硅谷刘海波老师快速入门Git笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Git原理及操作入门</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%AE%B9%E5%99%A8%E5%A4%96%E9%83%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E9%80%9A"><span class="toc-number">1.</span> <span class="toc-text">docker容器外部访问不通</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/11/11/IDEA%E9%85%8D%E7%BD%AEGithub%E8%B4%A6%E5%8F%B7%E5%B9%B6%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE%E5%88%B0Gihub%E4%BB%93%E5%BA%93%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/" class="archive-article-date">
-  	<time datetime="2023-11-11T05:22:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-11</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/11/11/IDEA%E9%85%8D%E7%BD%AEGithub%E8%B4%A6%E5%8F%B7%E5%B9%B6%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE%E5%88%B0Gihub%E4%BB%93%E5%BA%93%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/">IDEA上传项目到Gihub仓库并开启多人协作</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IDEA配置Github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
+
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "Jej1SFct4tsDn36PPuPj46Y1-gzGzoHsz",
+    app_key: "5PfOnDrigiIVMk8j3EgjRhmb",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+    </section>
+  
+
+
+
 
 
           </div>
@@ -329,8 +456,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
